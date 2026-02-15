@@ -49,10 +49,16 @@
             <option value="Mohamed">Mohamed</option>
             <option value="Omar">Omar</option>
             <option value="Bilal">Bilal</option>
-            <option value="Baraa">Baraa</option>
+            <option value="Baraa">Baraa (Admin)</option>
             <option value="Zeyad">Zeyad</option>
             <option value="Zuhair">Zuhair</option>
           </select>
+          <input
+            class="input"
+            type="password"
+            id="adminPassword"
+            placeholder="Admin password"
+          />
           <button class="button" id="loginBtn">Continue</button>
         </div>
       </section>
@@ -60,7 +66,11 @@
       <nav class="tabs" id="tabs" aria-label="Main navigation">
         <button class="tab tab--active" data-tab="dashboard">Dashboard</button>
         <button class="tab" data-tab="report">Add Report</button>
-        <button class="tab" data-tab="history">History</button>
+        <button class="tab" data-tab="transactions">Transactions</button>
+        <button class="tab" data-tab="about">About Me</button>
+        <button class="tab tab--admin" data-tab="admin" id="adminTab">
+          Admin Panel
+        </button>
       </nav>
 
       <main class="content">
@@ -124,6 +134,10 @@
                   maxlength="30"
                 />
               </label>
+              <div>
+                <p class="input-label">Who heard the bad word?</p>
+                <div class="checkbox-grid" id="heardList"></div>
+              </div>
               <button class="button button--pulse" type="submit" id="submitBtn">
                 Submit report
               </button>
@@ -132,11 +146,53 @@
           <div class="floating-layer" id="floatingLayer"></div>
         </section>
 
-        <section class="tab-panel" id="history">
+        <section class="tab-panel" id="transactions">
           <div class="panel">
-            <h2>Transaction History</h2>
-            <p>Real-time feed of every report.</p>
-            <div class="history-list" id="historyList"></div>
+            <h2>Payments Due</h2>
+            <p>Money you need to pay back to friends.</p>
+            <div class="history-list" id="debtsOwedList"></div>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="about">
+          <div class="panel">
+            <h2>About Me</h2>
+            <p>Your balance and who owes who.</p>
+            <div class="summary-grid">
+              <div class="summary-card">
+                <p class="metric__label">Current balance</p>
+                <p class="metric__value" id="aboutBalance">0</p>
+              </div>
+              <div class="summary-card">
+                <p class="metric__label">Total owed</p>
+                <p class="metric__value" id="totalOwed">0</p>
+              </div>
+              <div class="summary-card">
+                <p class="metric__label">Total to receive</p>
+                <p class="metric__value" id="totalReceive">0</p>
+              </div>
+            </div>
+            <div class="two-col">
+              <div>
+                <h3 class="section-title">You owe</h3>
+                <div class="list" id="oweList"></div>
+              </div>
+              <div>
+                <h3 class="section-title">Owes you</h3>
+                <div class="list" id="owedList"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="admin">
+          <div class="panel panel--admin">
+            <div class="admin-header">
+              <h2>Admin Approval</h2>
+              <span class="badge">Admin only</span>
+            </div>
+            <p>Approve or reject pending reports before balances change.</p>
+            <div class="history-list" id="pendingReports"></div>
           </div>
         </section>
       </main>

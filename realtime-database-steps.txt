@@ -8,6 +8,7 @@ Realtime Database setup (brief)
 - Click the </> Web icon in the project overview
 - Register the app and copy the config object
 - Paste it into firebaseConfig in app.js
+- IMPORTANT: Add databaseURL from step 4 to the config
 
 3) Enable Authentication
 - Build > Authentication > Get started
@@ -18,6 +19,8 @@ Realtime Database setup (brief)
 - Build > Realtime Database > Create Database
 - Start in test mode (temporary)
 - Choose a region
+- COPY THE DATABASE URL shown at the top (e.g., https://PROJECT-ID-default-rtdb.firebaseio.com)
+- Add this URL to firebaseConfig as "databaseURL"
 
 5) Add temporary rules (authenticated only)
 - Realtime Database > Rules
