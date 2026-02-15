@@ -1,0 +1,37 @@
+Realtime Database setup (brief)
+
+1) Create Firebase project
+- Go to https://console.firebase.google.com
+- Add project, pick a name, create.
+
+2) Register web app
+- Click the </> Web icon in the project overview
+- Register the app and copy the config object
+- Paste it into firebaseConfig in app.js
+
+3) Enable Authentication
+- Build > Authentication > Get started
+- Sign-in method > enable Anonymous
+- Save
+
+4) Create Realtime Database
+- Build > Realtime Database > Create Database
+- Start in test mode (temporary)
+- Choose a region
+
+5) Add temporary rules (authenticated only)
+- Realtime Database > Rules
+- Use:
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+
+6) Run with a local server
+- Use VS Code Live Server or another local server
+- Do not open index.html with file://
+
+7) Verify
+- Login, submit a report, and check data appears in Realtime Database
