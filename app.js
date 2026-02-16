@@ -57,6 +57,7 @@ let reporterName;
 let reportForm;
 let wordInput;
 let debtsOwedList;
+let myReportsList;
 let toast;
 let toastText;
 let floatingLayer;
@@ -74,6 +75,7 @@ let currentUserName = "";
 let currentRole = "user";
 let usersCache = {};
 let transactionsCache = {};
+let reportsCache = {};
 
 const isFirebaseConfigReady = () => {
   const values = Object.values(firebaseConfig);
@@ -158,6 +160,44 @@ const renderDebtsOwed = () => {
       </div>
     `;
     debtsOwedList.appendChild(item);
+  });
+};
+
+const renderMyReports = () => {
+  if (!myReportsList) return;
+  myReportsList.innerHTML = "";
+
+  if (!currentUserName) {
+    myReportsList.innerHTML = "<div class=\"list-item list-item__empty\">Sign in to view your reports.</div>";
+    return;
+  }
+
+  const items = Object.values(reportsCache || {})
+    .filter((entry) => entry && entry.reporter === currentUserName)
+    .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+  if (!items.length) {
+    myReportsList.innerHTML = "<div class=\"list-item list-item__empty\">No reports submitted yet.</div>";
+    return;
+  }
+
+  items.forEach((entry) => {
+    const time = entry.timestamp ? new Date(entry.timestamp) : new Date();
+    const formattedTime = time.toLocaleString();
+    const status = entry.status || "pending";
+    const heardText = entry.heardBy?.length ? entry.heardBy.join(", ") : "All others";
+
+    const item = document.createElement("div");
+    item.className = "history-item";
+    item.innerHTML = `
+      <div class="history-item__meta">
+        <span>${formattedTime}</span>
+        <span class="status-pill status-pill--${status}">${status}</span>
+      </div>
+      <strong>${entry.offender}</strong> said "${entry.word}"
+      <div class="history-item__impact">Heard by: ${heardText}</div>
+    `;
+    myReportsList.appendChild(item);
   });
 };
 
@@ -249,6 +289,7 @@ const setLoggedInUI = (name, role = "user") => {
     fallback?.click();
   }
   updateAboutMe();
+  renderMyReports();
 };
 
 const ensureUsersExist = async () => {
@@ -302,6 +343,11 @@ const listenToReports = () => {
     const items = Object.entries(data).map(([id, entry]) => ({ ...entry, id }));
     console.log("Reports listener triggered. Total reports:", items.length);
 
+    reportsCache = items.reduce((acc, entry) => {
+      acc[entry.id] = entry;
+      return acc;
+    }, {});
+
     // Filter by status
     const pending = items.filter((r) => r.status === "pending");
     const accepted = items.filter((r) => r.status === "accepted");
@@ -341,6 +387,8 @@ const listenToReports = () => {
         pendingReports.appendChild(item);
       });
     }
+
+    renderMyReports();
   });
 };
 
@@ -672,6 +720,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   reportForm = document.getElementById("reportForm");
   wordInput = document.getElementById("wordInput");
   debtsOwedList = document.getElementById("debtsOwedList");
+  myReportsList = document.getElementById("myReportsList");
   toast = document.getElementById("toast");
   toastText = document.getElementById("toastText");
   floatingLayer = document.getElementById("floatingLayer");
@@ -690,6 +739,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     loginBtn: !!loginBtn,
     reportForm: !!reportForm,
     debtsOwedList: !!debtsOwedList,
+    myReportsList: !!myReportsList,
     adminPassword: !!adminPassword,
     adminTab: !!adminTab,
     pendingReports: !!pendingReports,

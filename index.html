@@ -66,6 +66,7 @@
       <nav class="tabs" id="tabs" aria-label="Main navigation">
         <button class="tab tab--active" data-tab="dashboard">Dashboard</button>
         <button class="tab" data-tab="report">Add Report</button>
+        <button class="tab" data-tab="my-reports">My Reports</button>
         <button class="tab" data-tab="transactions">Transactions</button>
         <button class="tab" data-tab="about">About Me</button>
         <button class="tab tab--admin" data-tab="admin" id="adminTab">
@@ -144,6 +145,14 @@
             </form>
           </div>
           <div class="floating-layer" id="floatingLayer"></div>
+        </section>
+
+        <section class="tab-panel" id="my-reports">
+          <div class="panel">
+            <h2>My Reports</h2>
+            <p>Track your submissions and their approval status.</p>
+            <div class="history-list" id="myReportsList"></div>
+          </div>
         </section>
 
         <section class="tab-panel" id="transactions">
