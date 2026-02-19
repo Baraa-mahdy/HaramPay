@@ -21,19 +21,18 @@ import {
 
 // Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyC45eKCJzh8ss51lFKwYglnH9Ovcr4cpq0",
-  authDomain: "harampay-293ba.firebaseapp.com",
-  databaseURL: "https://harampay-293ba-default-rtdb.firebaseio.com",
-  projectId: "harampay-293ba",
-  storageBucket: "harampay-293ba.firebasestorage.app",
-  messagingSenderId: "1086393459596",
-  appId: "1:1086393459596:web:f223887a1ca850283ceca9",
-  measurementId: "G-88S5CJJJRB",
+  apiKey: "AIzaSyD-sEyKRNYBDqiCi3Z0UNABni4_M47pKIc",
+  authDomain: "harampayzezoediton.firebaseapp.com",
+  projectId: "harampayzezoediton",
+  storageBucket: "harampayzezoediton.firebasestorage.app",
+  messagingSenderId: "546279195040",
+  appId: "1:546279195040:web:3c26726eb14b4ad2afe4c5",
+  measurementId: "G-963ZPP9Y9R"
 };
 
-const USERS = ["Mohamed", "Omar", "Bilal", "Baraa", "Zeyad", "Zuhair"];
-const ADMIN_NAME = "Baraa";
-const ADMIN_PASSWORD = "boba3213";
+const USERS = ["Aissar", "Abdo", "Omar", "Zuhair"];
+const ADMIN_NAME = "Zuhair";
+const ADMIN_PASSWORD = "5118";
 
 let app;
 let auth;
