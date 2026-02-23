@@ -30,9 +30,9 @@ const firebaseConfig = {
   measurementId: "G-963ZPP9Y9R"
 };
 
-const USERS = ["Aissar", "Abdo", "Omar", "Zuhair"];
-const ADMIN_NAME = "Zuhair";
-const ADMIN_PASSWORD = "5118";
+const USERS = ["Mohamed", "Zeyad", "Zuhair", "Bilal", "Omar", "Baraa"];
+const ADMIN_NAME = "Baraa";
+const ADMIN_PASSWORD = "boba3213";
 
 let app;
 let auth;
